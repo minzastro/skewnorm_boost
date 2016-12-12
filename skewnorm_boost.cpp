@@ -32,7 +32,7 @@ class SkewNorm {
     }
 };
 
-BOOST_PYTHON_MODULE(skewnorm)
+BOOST_PYTHON_MODULE(skewnorm_boost)
 {
     using namespace boost::python;
     def("pdf", pdf);
