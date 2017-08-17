@@ -17,24 +17,24 @@ double cpdf(double x, double dof){
 
 class StudentsT {
     students_t_double _inner = students_t_double(1);
+    double _loc;
     double _scale;
-    double _shape;
 
     public:
-    StudentsT(double dof, double scale, double shape)
+    StudentsT(double loc, double scale, double dof)
         {
             _inner = students_t_double(dof);
+            _loc = loc;
             _scale = scale;
-            _shape = shape;
         }
     double xpdf(double x){
-        return pdf(_inner, (x - _scale) / _shape);
+        return pdf(_inner, (x - _loc) / _scale);
     }
     double xcdf(double x){
-        return cdf(_inner, (x - _scale) / _shape);
+        return cdf(_inner, (x - _loc) / _scale);
     }
     double xppf(double x){
-        return quantile(_inner, (x - _scale) / _shape);
+        return quantile(_inner, (x - _loc) / _scale);
     }
 };
 
