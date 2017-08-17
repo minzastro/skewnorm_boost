@@ -1,7 +1,6 @@
 #include <boost/python.hpp>
 #include <boost/math/distributions/skew_normal.hpp>
 using boost::math::skew_normal_distribution;
-
 #include <iostream>
 
 typedef skew_normal_distribution<double> skew_normal_double;
@@ -30,6 +29,9 @@ class SkewNorm {
     double xcdf(double x){
         return cdf(_inner, x);
     }
+    double xppf(double x){
+        return quantile(_inner, x);
+    }
 };
 
 BOOST_PYTHON_MODULE(skewnorm_boost)
@@ -40,5 +42,6 @@ BOOST_PYTHON_MODULE(skewnorm_boost)
     class_<SkewNorm>("SkewNorm", init<double,double,double>())
         .def("pdf", &SkewNorm::xpdf)
         .def("cdf", &SkewNorm::xcdf)
+        .def("ppf", &SkewNorm::xppf)
     ;
 }
