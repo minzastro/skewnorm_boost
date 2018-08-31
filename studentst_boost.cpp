@@ -34,7 +34,7 @@ class StudentsT {
         return cdf(_inner, (x - _loc) / _scale);
     }
     double xppf(double x){
-        return quantile(_inner, (x - _loc) / _scale);
+        return (quantile(_inner, x) - _loc) / _scale;
     }
 };
 
