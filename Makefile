@@ -16,8 +16,11 @@ py3: $(OBJECTS)
 
 
 $(OBJECTS): %:%_boost.cpp %_boost.so
-	$(GPP) -I$(PY_INCLUDE_DIR) -c -o $@_boost.o $^
+	$(GPP) -I$(PY_INCLUDE_DIR) -shared -Wl,-soname,"$@" -L/usr/lib $< -l$(BOOST) -o $@_boost.so
 #	$(GPP) -shared -Wl,-soname,"$@_boost.so" -L/usr/lib $@_boost.o -l$(BOOST) -o $@_boost.so
 
 %.so: %.o
-	$(GPP) -shared -Wl,-soname,"$@" -L/usr/lib $< -l$(BOOST) -o $@
+	
+
+%.o: %.cpp
+	$(GPP) -I$(PY_INCLUDE_DIR) -c -o $@ $^
